@@ -12,7 +12,6 @@ class StaticServer {
   using Response = httplib::Response;
 
  public:
-  StaticServer() {}
   StaticServer(std::string ip, int port, std::string dir)
       : ip_(ip), port_(port), base_dir_(dir) {}
 
@@ -28,9 +27,9 @@ class StaticServer {
   HandlerResponse pre_handle(const Request&, Response&);
 
  private:
-  std::string ip_{"0.0.0.0"};
-  int port_{35565};
-  std::string base_dir_{"."};
+  std::string ip_;
+  int port_;
+  std::string base_dir_;
   httplib::Server svr_;
 };
 

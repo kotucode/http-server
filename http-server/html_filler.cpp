@@ -91,22 +91,23 @@ std::string HtmlFiller::GenerateDirList(const std::string& url_path,
     if (entry.is_directory()) {
       name += '/';
     } else if (entry.is_regular_file()) {
-      static constexpr double GiB_lim = 1024L * 1024L * 1024L * 8L;
-      static constexpr double MiB_lim = 1024L * 1024L * 8L;
-      static constexpr double KiB_lim = 1024L * 8L;
-      auto filesize = static_cast<double>(entry.file_size());
-      auto suffix = "B";
-      if (filesize > GiB_lim) {
-        suffix = "GiB";
-        filesize /= GiB_lim;
-      } else if (filesize > MiB_lim) {
-        suffix = "MiB";
-        filesize /= MiB_lim;
-      } else if (filesize > KiB_lim) {
-        suffix = "KiB";
-        filesize /= KiB_lim;
-      }
-      size = std::format("{:.2}{}", filesize, suffix);
+      // static constexpr double GiB_lim = 1024L * 1024L * 1024L * 8L;
+      // static constexpr double MiB_lim = 1024L * 1024L * 8L;
+      // static constexpr double KiB_lim = 1024L * 8L;
+      // auto filesize = static_cast<double>(entry.file_size());
+      // auto suffix = "B";
+      // if (filesize > GiB_lim) {
+      //   suffix = "GiB";
+      //   filesize /= GiB_lim;
+      // } else if (filesize > MiB_lim) {
+      //   suffix = "MiB";
+      //   filesize /= MiB_lim;
+      // } else if (filesize > KiB_lim) {
+      //   suffix = "KiB";
+      //   filesize /= KiB_lim;
+      // }
+      // size = std::format("{:.2f}{}", filesize, suffix);
+      size = std::to_string(entry.file_size());
     }
 
     data["entries"].push_back({{"href", url_path + name},
@@ -115,7 +116,5 @@ std::string HtmlFiller::GenerateDirList(const std::string& url_path,
                                {"ftime", std::format("{:%F %R}", zoned_time)}});
   }
 
-  std::ostringstream html;
-  html << inja::render(kDirListTemplate, data);
-  return html.str();
+  return inja::render(kDirListTemplate, data);
 }
