@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Index of {{ title }}</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 1rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    th {
+      font-weight: 500;
+      color: #666;
+      border-bottom: 1px solid #ddd;
+    }
+
+    td {
+      border-bottom: 1px solid #eee;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    address {
+      margin-top: 2rem;
+      font-style: normal;
+      color: #888;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Index of {{ title }}</h1>
+  <hr>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Modified</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in entries %}
+      <tr>
+        <td><a href='{{ entry.href }}'>{{ entry.name }}</a></td>
+        <td>{{ entry.size }}</td>
+        <td>{{ entry.ftime }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <address>
+    Made with C++20 /
+    <a href='https://github.com/kotucode/http-server'>http-server</a>
+    server running @ {{ ip }}:{{ port }}
+  </address>
+</body>
+
+</html>
